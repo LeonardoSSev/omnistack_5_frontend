@@ -25,7 +25,11 @@ export default class Timeline extends Component {
       this.setState({ tweets: [data, ...this.state.tweets] });
     });
 
-    io.on('like', data => {});
+    io.on('like', data => {
+      this.setState({ tweets: this.state.tweets.map(tweet => {
+        tweet._id === data._id ? data: tweet
+      }) });
+    });
   }
 
   handleNewTweet = async event => {
