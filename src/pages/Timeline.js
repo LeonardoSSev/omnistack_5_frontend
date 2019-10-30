@@ -27,7 +27,7 @@ export default class Timeline extends Component {
 
     io.on('like', data => {
       this.setState({ tweets: this.state.tweets.map(tweet => {
-        tweet._id === data._id ? data: tweet
+        return tweet._id === data._id ? data: tweet
       }) });
     });
   }
@@ -42,7 +42,7 @@ export default class Timeline extends Component {
 
     await api.post('/tweets', { content, author});
 
-    this.setState.({ newTweet: '' });
+    this.setState({ newTweet: '' });
   };
 
   handleInputChange = event => {
