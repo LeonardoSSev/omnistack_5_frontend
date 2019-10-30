@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import api from '../services/api';
 import twitterLogo from '../twitter.svg';
+import Tweet from '../components/Tweet';
 import './Timeline.css';
 
 export default class Timeline extends Component {
   state = {
+    tweets: [],
     newTweet: ''
   }
 
-   handleNewTweet = async event => {
+   async componentDidMount() {
+     const response = await api.get('tweets');
+
+     this.setState({ tweets: response.data });
+   }
+
+  handleNewTweet = async event => {
     if (event.keyCode !== 13) {
       return;
     }
@@ -39,6 +47,12 @@ export default class Timeline extends Component {
           >
           </textarea>
         </form>
+        
+        <ul className="tweet-list">
+          { this.state.tweets.map(tweet => (
+            <Tweet key={tweet._id} tweet={tweet} />
+          )) }
+        </ul>
       </div>
     );
   }
