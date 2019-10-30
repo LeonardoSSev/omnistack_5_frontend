@@ -8,7 +8,7 @@ export default class Timeline extends Component {
     newTweet: ''
   }
 
-  async handleNewTweet = event => {
+   handleNewTweet = async event => {
     if (event.keyCode !== 13) {
       return;
     }
