@@ -17,6 +17,8 @@ export default class Login extends Component {
     }
 
     localStorage.setItem('@GoTwitter:username', username);
+
+    this.props.history.push('/timeline');
   }
 
   handleInputChange = (event) => {
